@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CollectionsUtils\CollectionsUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Inputs\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
