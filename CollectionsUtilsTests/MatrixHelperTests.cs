@@ -3,7 +3,7 @@ using CollectionsUtils;
 namespace CollectionsUtilsTests;
 
 [TestClass]
-public class MatrixHelperTests {
+public class MatrixExtensionsTests {
     [TestMethod]
     public void RotateTest() {
         var matrix = new int[][] {
@@ -12,7 +12,7 @@ public class MatrixHelperTests {
             [7, 8, 9]
         };
 
-        var rotatedMatrix = MatrixHelper.Rotate(matrix, clockWise: true);
+        var rotatedMatrix = matrix.Rotate(clockWise: true);
 
         Assert.AreEqual(3, rotatedMatrix.Length);
         Assert.AreEqual(3, rotatedMatrix[0].Length);
@@ -29,7 +29,7 @@ public class MatrixHelperTests {
         Assert.AreEqual(6, rotatedMatrix[2][1]);
         Assert.AreEqual(3, rotatedMatrix[2][2]);
 
-        rotatedMatrix = MatrixHelper.Rotate(matrix, clockWise: false);
+        rotatedMatrix = matrix.Rotate(clockWise: false);
 
         Assert.AreEqual(3, rotatedMatrix.Length);
         Assert.AreEqual(3, rotatedMatrix[0].Length);
@@ -45,5 +45,29 @@ public class MatrixHelperTests {
         Assert.AreEqual(1, rotatedMatrix[2][0]);
         Assert.AreEqual(4, rotatedMatrix[2][1]);
         Assert.AreEqual(7, rotatedMatrix[2][2]);
+    }
+
+    [TestMethod]
+    public void AddBordersTest() {
+        var array = new int[][] {
+            [0, 0],
+            [0, 0]
+        };
+        var arrayWithBorders = array.AddBorders(1);
+
+        Assert.AreEqual(4, arrayWithBorders.Length);
+        Assert.AreEqual(4, arrayWithBorders[0].Length);
+        Assert.AreEqual(4, arrayWithBorders[1].Length);
+        Assert.AreEqual(4, arrayWithBorders[2].Length);
+        Assert.AreEqual(4, arrayWithBorders[3].Length);
+
+        Assert.IsTrue(arrayWithBorders[0].All(o => o == 1));
+        Assert.IsTrue(arrayWithBorders[1][0] == 1);
+        Assert.IsTrue(arrayWithBorders[1][1..^1].All(o => o == 0));
+        Assert.IsTrue(arrayWithBorders[1][^1] == 1);
+        Assert.IsTrue(arrayWithBorders[2][0] == 1);
+        Assert.IsTrue(arrayWithBorders[2][1..^1].All(o => o == 0));
+        Assert.IsTrue(arrayWithBorders[2][^1] == 1);
+        Assert.IsTrue(arrayWithBorders[^1].All(o => o == 1));
     }
 }

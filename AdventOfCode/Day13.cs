@@ -28,7 +28,7 @@ public class Day13 : BaseDay
             if (y >= 0) {
                 sum += 100 * (y + 1);
             } else {
-                y = getMirrorLocationFunc(MatrixHelper.Rotate(map, clockWise: true));
+                y = getMirrorLocationFunc(map.Rotate(clockWise: true));
                 sum += y + 1;
             }
         }
