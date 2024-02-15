@@ -37,28 +37,8 @@ public class Day08 : BaseDay
         }
     }
 
-    ulong Part_2() {
-        var steps = new Queue<ulong>(NodeDic.Keys.Where(o => o.Last() == 'A')
-                                                 .Select(o => (ulong)Part_1(o, node => node.Last() == 'Z')));
-        var lcm = steps.Dequeue();
-
-        while (steps.TryDequeue(out var step))
-            lcm = LeastCommonMultiple(lcm, step);
-
-        return lcm;
-    }
-
-    ulong GreatestCommonFactor(ulong a, ulong b) {
-        while (b != 0) {
-            var temp = b;
-
-            b = a % b;
-            a = temp;
-        }
-
-        return a;
-    }
-
-    ulong LeastCommonMultiple(ulong a, ulong b)
-        => a / GreatestCommonFactor(a, b) * b;
+    ulong Part_2()
+        => NodeDic.Keys.Where(o => o.Last() == 'A')
+                       .Select(o => Convert.ToUInt64(Part_1(o, node => node.Last() == 'Z')))
+                       .Lcm();
 }
